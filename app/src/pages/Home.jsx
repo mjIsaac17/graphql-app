@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setModal } from '../actions/modal.action';
 import FabAdd from '../components/ui/FabAdd';
 import Modal from '../components/ui/Modal';
+import UserAdd from '../components/user/UserAdd';
 import UserList from '../components/user/UserList';
 import componentsModal from '../helpers/componentsModal';
 
@@ -22,8 +23,12 @@ const Home = () => {
         Manage Users
       </Typography>
       <UserList />
-      <FabAdd onClickFunction={handleAddUser} />
-      {modalState.componentName === componentsModal.userAdd && <Modal></Modal>}
+      <FabAdd onClickFunction={handleAddUser} tooltipText='Add user' />
+      {modalState.componentName === componentsModal.userAdd && (
+        <Modal>
+          <UserAdd />
+        </Modal>
+      )}
     </>
   );
 };

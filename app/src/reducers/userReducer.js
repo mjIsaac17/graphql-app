@@ -1,4 +1,4 @@
-import { GET_ALL } from '../actions/user.action';
+import { ADD, GET_ALL } from '../actions/user.action';
 
 const initialState = {
   userList: null,
@@ -13,6 +13,12 @@ const userReducer = (state = initialState, action = {}) => {
         userList: action.payload
       };
 
+    case ADD: {
+      return {
+        ...state,
+        userList: [...state.userList, action.payload]
+      };
+    }
     default:
       return state;
   }
