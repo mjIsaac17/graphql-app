@@ -1,17 +1,29 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { startGettingAllUsers } from '../actions/user.action';
-import Navbar from '../components/Navbar';
+import { Typography } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { setModal } from '../actions/modal.action';
+import FabAdd from '../components/FabAdd';
+import Modal from '../components/Modal';
+import UserList from '../components/UserList';
+import componentsModal from '../helpers/componentsModal';
 
 const Home = () => {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(startGettingAllUsers());
-  }, [dispatch]);
-
+  const modalState = useSelector((state) => state.modal);
+  const handleAddUser = () => {
+    dispatch(setModal(true, 'Add new user', componentsModal.userAdd));
+  };
   return (
     <>
-      <Navbar></Navbar>
+      <Typography
+        variant='h5'
+        component='p'
+        sx={{ marginTop: '15px', textAlign: 'center' }}
+      >
+        Manage Users
+      </Typography>
+      <UserList />
+      <FabAdd onClickFunction={handleAddUser} />
+      {modalState.componentName === componentsModal.userAdd && <Modal></Modal>}
     </>
   );
 };

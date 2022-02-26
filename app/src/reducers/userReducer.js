@@ -1,7 +1,7 @@
 import { GET_ALL } from '../actions/user.action';
 
 const initialState = {
-  userList: [],
+  userList: null,
   selectedUser: null
 };
 
@@ -14,7 +14,7 @@ const userReducer = (state = initialState, action = {}) => {
       };
 
     default:
-      return initialState;
+      return state;
   }
 };
 
