@@ -14,6 +14,13 @@ const ResponseType = require('./typeDefs/ResponseType');
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
+    getUserbyId: {
+      type: UserType,
+      args: { id: { type: GraphQLInt } },
+      async resolve(_, args) {
+        return await models.user.findByPk(args.id);
+      }
+    },
     getAllUsers: {
       type: new GraphQLList(UserType),
       async resolve(_, args) {
