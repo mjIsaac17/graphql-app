@@ -1,9 +1,9 @@
 import { Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { setModal } from '../actions/modal.action';
-import FabAdd from '../components/FabAdd';
-import Modal from '../components/Modal';
-import UserList from '../components/UserList';
+import FabAdd from '../components/ui/FabAdd';
+import Modal from '../components/ui/Modal';
+import UserList from '../components/user/UserList';
 import componentsModal from '../helpers/componentsModal';
 
 const Home = () => {

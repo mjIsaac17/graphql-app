@@ -4,7 +4,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setModal } from '../actions/modal.action';
+import { setModal } from '../../actions/modal.action';
 
 const Modal = ({ children }) => {
   const dispatch = useDispatch();
