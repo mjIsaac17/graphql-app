@@ -15,6 +15,7 @@ import {
 } from '../../actions/user.action';
 import { setModal } from '../../actions/modal.action';
 import componentsModal from '../../helpers/componentsModal';
+import { Typography } from '@mui/material';
 
 const UserList = memo(() => {
   console.log('UserList');
@@ -45,32 +46,42 @@ const UserList = memo(() => {
         <p> Loading users...</p>
       ) : (
         <>
-          <List sx={{ maxWidth: '1300px', width: '95%', margin: '0 auto' }}>
-            {userList.map((user, idx) => (
-              <div key={idx}>
-                <ListItem>
-                  <ListItemText primary={user.name}></ListItemText>
-                  <IconButton
-                    onClick={() => handleEdit(user)}
-                    aria-label='delete-user'
-                    variant='contained'
-                    color='info'
-                  >
-                    <EditIcon />
-                  </IconButton>
-                  <IconButton
-                    aria-label='delete-user'
-                    variant='contained'
-                    color='error'
-                    onClick={() => handleDelete(user)}
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                </ListItem>
-                <Divider />
-              </div>
-            ))}
-          </List>
+          {userList.length === 0 ? (
+            <Typography
+              variant='h6'
+              component='p'
+              sx={{ textAlign: 'center', marginTop: '40px' }}
+            >
+              There are no users
+            </Typography>
+          ) : (
+            <List sx={{ maxWidth: '1300px', width: '95%', margin: '0 auto' }}>
+              {userList.map((user, idx) => (
+                <div key={idx}>
+                  <ListItem>
+                    <ListItemText primary={user.name}></ListItemText>
+                    <IconButton
+                      onClick={() => handleEdit(user)}
+                      aria-label='delete-user'
+                      variant='contained'
+                      color='info'
+                    >
+                      <EditIcon />
+                    </IconButton>
+                    <IconButton
+                      aria-label='delete-user'
+                      variant='contained'
+                      color='error'
+                      onClick={() => handleDelete(user)}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  </ListItem>
+                  <Divider />
+                </div>
+              ))}
+            </List>
+          )}
         </>
       )}
     </>
