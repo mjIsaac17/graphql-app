@@ -29,12 +29,12 @@ const UserList = memo(() => {
   };
 
   const handleDelete = (user) => {
-    console.log(user);
+    dispatch(startGettingUserById(user.id));
+    dispatch(setModal(true, 'Delete user', componentsModal.userDelete));
   };
 
   useEffect(() => {
     if (!userList) {
-      console.log('Effect getUsers');
       dispatch(startGettingAllUsers());
     }
   }, [dispatch, userList]);

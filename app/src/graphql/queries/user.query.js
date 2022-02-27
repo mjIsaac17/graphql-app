@@ -29,6 +29,13 @@ const userQueries = {
       status
     }
   }
+  `,
+  deleteUser: (id) => `
+  mutation {
+    deleteUser(id: ${id}) {
+      status
+    }
+  }
   `
 };
 

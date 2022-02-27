@@ -4,6 +4,7 @@ import { setModal } from '../actions/modal.action';
 import FabAdd from '../components/ui/FabAdd';
 import Modal from '../components/ui/Modal';
 import UserAdd from '../components/user/UserAdd';
+import UserDelete from '../components/user/UserDelete';
 import UserEdit from '../components/user/UserEdit';
 import UserList from '../components/user/UserList';
 import componentsModal from '../helpers/componentsModal';
@@ -34,6 +35,11 @@ const Home = () => {
       {modalState.componentName === componentsModal.userEdit && (
         <Modal>
           <UserEdit />
+        </Modal>
+      )}
+      {modalState.componentName === componentsModal.userDelete && (
+        <Modal>
+          <UserDelete />
         </Modal>
       )}
     </>

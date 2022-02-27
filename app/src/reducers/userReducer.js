@@ -1,4 +1,4 @@
-import { ADD, GET, GET_ALL, UPDATE } from '../actions/user.action';
+import { ADD, DELETE, GET, GET_ALL, UPDATE } from '../actions/user.action';
 
 const initialState = {
   userList: null,
@@ -32,6 +32,13 @@ const userReducer = (state = initialState, action = {}) => {
         userList: state.userList.map((user) =>
           user.id !== id ? user : action.payload
         )
+      };
+
+    case DELETE:
+      const deletedId = action.payload;
+      return {
+        ...state,
+        userList: state.userList.filter((user) => user.id !== deletedId)
       };
 
     default:

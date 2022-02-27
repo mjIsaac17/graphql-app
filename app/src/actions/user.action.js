@@ -109,3 +109,25 @@ export const startUpdatingUser = (userData) => {
     }
   };
 };
+
+const successRemoveUser = (userId) => ({
+  type: DELETE,
+  payload: userId
+});
+
+export const startDeletingUser = (userId) => {
+  return async (dispatch) => {
+    try {
+      const response = await graphQLRequest(userQueries.deleteUser(userId));
+      if (response.ok) {
+        dispatch(successRemoveUser(userId));
+        dispatch(setModal(false));
+      } else {
+        alert('It was not possible to delete the user');
+      }
+    } catch (error) {
+      alert('It was not possible to delete the user');
+      console.log(error);
+    }
+  };
+};
