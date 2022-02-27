@@ -8,7 +8,13 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
-import { startGettingAllUsers } from '../../actions/user.action';
+import {
+  setCurrentUser,
+  startGettingAllUsers,
+  startGettingUserById
+} from '../../actions/user.action';
+import { setModal } from '../../actions/modal.action';
+import componentsModal from '../../helpers/componentsModal';
 
 const UserList = memo(() => {
   console.log('UserList');
@@ -17,7 +23,9 @@ const UserList = memo(() => {
 
   // handlers
   const handleEdit = (user) => {
-    console.log(user);
+    dispatch(setCurrentUser(null));
+    dispatch(startGettingUserById(user.id));
+    dispatch(setModal(true, 'Update user', componentsModal.userEdit));
   };
 
   const handleDelete = (user) => {

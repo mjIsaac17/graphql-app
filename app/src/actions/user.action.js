@@ -10,6 +10,28 @@ export const UPDATE = 'user/UPDATE';
 export const DELETE = 'user/DELETE';
 
 // action creators
+export const setCurrentUser = (userData) => ({
+  type: GET,
+  payload: userData
+});
+
+export const startGettingUserById = (userId = 1) => {
+  return async (dispatch) => {
+    try {
+      const response = await graphQLRequest(userQueries.getUserById(userId));
+      if (response.ok) {
+        const userData = await response.json();
+        dispatch(setCurrentUser(userData.data.getUserbyId));
+      } else {
+        alert('It was not possible to load the user data');
+      }
+    } catch (error) {
+      alert('It was not possible to load the user data');
+      console.log(error);
+    }
+  };
+};
+
 const successGetAllUsers = (userList) => ({
   type: GET_ALL,
   payload: userList
@@ -54,6 +76,35 @@ export const startAddingUser = (userData) => {
       }
     } catch (error) {
       alert('It was not possible to save the user');
+      console.log(error);
+    }
+  };
+};
+
+const successUpdateUser = (userData) => ({
+  type: UPDATE,
+  payload: userData
+});
+
+export const startUpdatingUser = (userData) => {
+  return async (dispatch) => {
+    try {
+      const response = await graphQLRequest(
+        userQueries.updateUser(
+          userData.id,
+          userData.name,
+          userData.age,
+          userData.isSingle
+        )
+      );
+      if (response.ok) {
+        dispatch(successUpdateUser({ id: userData.id, name: userData.name }));
+        dispatch(setModal(false));
+      } else {
+        alert('It was not possible to update the user');
+      }
+    } catch (error) {
+      alert('It was not possible to update the user');
       console.log(error);
     }
   };

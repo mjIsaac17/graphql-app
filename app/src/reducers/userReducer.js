@@ -1,4 +1,4 @@
-import { ADD, GET_ALL } from '../actions/user.action';
+import { ADD, GET, GET_ALL, UPDATE } from '../actions/user.action';
 
 const initialState = {
   userList: null,
@@ -7,18 +7,33 @@ const initialState = {
 
 const userReducer = (state = initialState, action = {}) => {
   switch (action.type) {
+    case GET:
+      return {
+        ...state,
+        selectedUser: action.payload
+      };
+
     case GET_ALL:
       return {
         ...state,
         userList: action.payload
       };
 
-    case ADD: {
+    case ADD:
       return {
         ...state,
         userList: [...state.userList, action.payload]
       };
-    }
+
+    case UPDATE:
+      const id = action.payload.id;
+      return {
+        ...state,
+        userList: state.userList.map((user) =>
+          user.id !== id ? user : action.payload
+        )
+      };
+
     default:
       return state;
   }
