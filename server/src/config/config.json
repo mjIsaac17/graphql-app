@@ -1,7 +1,7 @@
 {
   "db": {
-    "username": "nodejs_user",
-    "password": "nodejs_user",
+    "username": "graphql_user",
+    "password": "graphql_user",
     "databaseName": "graphql-app",
     "host": "localhost",
     "dialect": "mysql"
